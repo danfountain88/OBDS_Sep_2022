@@ -22,7 +22,7 @@ parser.add_argument('-b',                               # input
                     ) 
 parser.add_argument('-o',                               # output short form
                     '--output',                         # output long form
-                    default='onscreen',           # standard out           
+                    default='onscreen',           # standard out, normally - or stdout           
                     dest='overlap',                      # Variable name to store option (optional)
                     help='This is a list of sequence names in your bed_a that matches bed_b',        # Help text (optional)
                     )
@@ -32,7 +32,8 @@ logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
 
 #Run warnings
 if args.bed_a == 'None' or args.bed_b == 'None':
-    logging.warning('No -a file specified. Terminating program!')
+    logging.warning('No -a or -b file specified. Terminating program!')
+    sys.exit()
 #overlapping intervals
 else:
     print('Opening files...')
@@ -63,7 +64,7 @@ else:
                             end_b = int(b_columns[2])
                             name_b = b_columns[3]                   
                             if chr_a == chr_b:                                  #if the chromosomes are the same then ...
-                                if (start_b >= start_a and start_b <= end_a) or (start_a >= start_b and start_a <= end_b): # if the start b > startcheck if intervals overlap
+                                if end_a >= start_b and end_b >= start_a:
                                     if args.overlap == 'onscreen':
                                         sys.stdout.write(f'{b_columns[3]}\t')
                                     else:
