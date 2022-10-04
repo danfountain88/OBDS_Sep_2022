@@ -3,3 +3,5 @@
 *fastq
 *fq
 *.gz
+*.tsv
+*.html
