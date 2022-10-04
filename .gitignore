@@ -2,6 +2,6 @@
 *bed
 *fastq
 *fq
-*.gz
-*.tsv
-*.html
+*gz
+*tsv
+*html
